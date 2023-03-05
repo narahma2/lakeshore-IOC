@@ -55,7 +55,7 @@ rbv_setT = builder.aIn(
 rec_setT = builder.aOut(
                         'TSET',
                         initial_value=ls336.get_control_setpoint(3),
-                        on_update=lambda v: ls336.set_control_setpoint(3, v)
+                        on_update=lambda v: ls336.set_control_setpoint(3, v),
                         DRVL=15,
                         DRVH=110,
                         )
@@ -64,11 +64,6 @@ rec_setT = builder.aOut(
 rbv_status = builder.boolIn(
                             'STATUS_RBV',
                             initial_value=ls336.get_heater_range(3).value
-                            )
-rec_status = builder.boolIn(
-                            'STATUS',
-                            initial_value=False,
-                            on_update=lambda v: set_heater(v)
                             )
 
 # Heater mode
@@ -95,7 +90,7 @@ rec_ramp = builder.aOut(
 
 # P value
 rbv_p = builder.aIn(
-                    'P_RBV'
+                    'P_RBV',
                     initial_value=ls336.get_heater_pid(3)['gain']
                     )
 rec_p = builder.aOut(
@@ -106,7 +101,7 @@ rec_p = builder.aOut(
 
 # I value
 rbv_i = builder.aIn(
-                    'I_RBV'
+                    'I_RBV',
                     initial_value=ls336.get_heater_pid(3)['integral']
                     )
 rec_i = builder.aOut(
@@ -117,8 +112,8 @@ rec_i = builder.aOut(
 
 # D value
 rbv_d = builder.aIn(
-                    'D_RBV'
-                    initial_value=ls336.get_heater_pid(3)['derivative']
+                    'D_RBV',
+                    initial_value=ls336.get_heater_pid(3)['ramp_rate']
                     )
 rec_d = builder.aOut(
                      'D',
@@ -138,9 +133,9 @@ async def update_status():
         rbv_setT.set(ls336.get_control_setpoint(3))
         rbv_status.set(ls336.get_heater_range(3).value)
         rbv_ramp.set(ls336.get_setpoint_ramp_parameter(3)['rate_value'])
-        rbv_p.set(ls336.get_header_pid(3)['gain'])
-        rbv_i.set(ls336.get_header_pid(3)['integral'])
-        rbv_d.set(ls336.get_header_pid(3)['derivative'])
+        rbv_p.set(ls336.get_heater_pid(3)['gain'])
+        rbv_i.set(ls336.get_heater_pid(3)['integral'])
+        rbv_d.set(ls336.get_heater_pid(3)['ramp_rate'])
         await asyncio.sleep(0.5)
 
 
@@ -164,9 +159,9 @@ def set_pid(v, mode):
     pid = ls336.get_heater_pid(3)
 
     if mode == 'P':
-        ls336.set_heater_pid(3, v, pid['integral'], pid['derivative'])
+        ls336.set_heater_pid(3, v, pid['integral'], pid['ramp_rate'])
     elif mode == 'I':
-        ls336.set_heater_pid(3, pid['gain'], v, pid['derivative'])
+        ls336.set_heater_pid(3, pid['gain'], v, pid['ramp_rate'])
     elif mode == 'D':
         ls336.set_heater_pid(3, pid['gain'], pid['integral'], v)
 
