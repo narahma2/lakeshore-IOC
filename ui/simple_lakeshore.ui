@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>490</width>
-    <height>540</height>
+    <height>662</height>
    </rect>
   </property>
   <property name="palette">
@@ -476,9 +476,16 @@
     </property>
     <property name="falseColor">
      <color>
+      <red>255</red>
+      <green>0</green>
+      <blue>50</blue>
+     </color>
+    </property>
+    <property name="trueColor">
+     <color>
       <red>0</red>
       <green>255</green>
-      <blue>50</blue>
+      <blue>0</blue>
      </color>
     </property>
    </widget>
@@ -638,7 +645,7 @@
      <rect>
       <x>250</x>
       <y>71</y>
-      <width>100</width>
+      <width>16</width>
       <height>31</height>
      </rect>
     </property>
@@ -671,9 +678,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>180</y>
+      <y>240</y>
       <width>471</width>
-      <height>351</height>
+      <height>411</height>
      </rect>
     </property>
     <property name="title">
@@ -794,7 +801,7 @@
       </font>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change groove density setting (takes a while to change).&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;- Low:&lt;/span&gt; 300 gr/mm; ~10 nm/mm dispersion; 0–6000 nm range&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;- Medium:&lt;/span&gt; 600 gr/mm; ~5 nm/mm dispersion; 0–3000 nm range&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;- High:&lt;/span&gt; 1200 gr/mm; ~2 nm/mm dispersion; 0–1500 nm range&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="channel" stdset="0">
       <string>LS336:XEOL:MODE</string>
@@ -811,6 +818,11 @@
      </property>
      <item>
       <property name="text">
+       <string>OFF</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>CLOSED LOOP</string>
       </property>
      </item>
@@ -824,7 +836,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>80</y>
+       <y>130</y>
        <width>141</width>
        <height>31</height>
       </rect>
@@ -845,13 +857,13 @@
      <property name="geometry">
       <rect>
        <x>170</x>
-       <y>80</y>
+       <y>130</y>
        <width>131</width>
        <height>31</height>
       </rect>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum wavelength depends on the grating.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="channel" stdset="0">
       <string>LS336:XEOL:TSET</string>
@@ -886,7 +898,7 @@
      <property name="geometry">
       <rect>
        <x>320</x>
-       <y>80</y>
+       <y>130</y>
        <width>141</width>
        <height>31</height>
       </rect>
@@ -928,12 +940,15 @@
      <property name="framePresent" stdset="0">
       <bool>false</bool>
      </property>
+     <property name="precision">
+      <number>3</number>
+     </property>
     </widget>
     <widget class="caLed" name="caled_2">
      <property name="geometry">
       <rect>
        <x>130</x>
-       <y>180</y>
+       <y>230</y>
        <width>30</width>
        <height>30</height>
       </rect>
@@ -956,7 +971,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>130</y>
+       <y>180</y>
        <width>151</width>
        <height>31</height>
       </rect>
@@ -977,13 +992,13 @@
      <property name="geometry">
       <rect>
        <x>170</x>
-       <y>130</y>
+       <y>180</y>
        <width>131</width>
        <height>31</height>
       </rect>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum wavelength depends on the grating.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="channel" stdset="0">
       <string>LS336:XEOL:RAMP</string>
@@ -1018,7 +1033,7 @@
      <property name="geometry">
       <rect>
        <x>320</x>
-       <y>130</y>
+       <y>180</y>
        <width>141</width>
        <height>31</height>
       </rect>
@@ -1065,7 +1080,7 @@
      <property name="geometry">
       <rect>
        <x>170</x>
-       <y>180</y>
+       <y>230</y>
        <width>291</width>
        <height>31</height>
       </rect>
@@ -1103,7 +1118,7 @@
      <property name="geometry">
       <rect>
        <x>320</x>
-       <y>230</y>
+       <y>280</y>
        <width>141</width>
        <height>31</height>
       </rect>
@@ -1150,13 +1165,13 @@
      <property name="geometry">
       <rect>
        <x>170</x>
-       <y>230</y>
+       <y>280</y>
        <width>131</width>
        <height>31</height>
       </rect>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum wavelength depends on the grating.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="channel" stdset="0">
       <string>LS336:XEOL:P</string>
@@ -1191,7 +1206,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>230</y>
+       <y>280</y>
        <width>151</width>
        <height>31</height>
       </rect>
@@ -1212,13 +1227,13 @@
      <property name="geometry">
       <rect>
        <x>170</x>
-       <y>270</y>
+       <y>320</y>
        <width>131</width>
        <height>31</height>
       </rect>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum wavelength depends on the grating.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="channel" stdset="0">
       <string>LS336:XEOL:I</string>
@@ -1253,7 +1268,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>270</y>
+       <y>320</y>
        <width>151</width>
        <height>31</height>
       </rect>
@@ -1274,7 +1289,7 @@
      <property name="geometry">
       <rect>
        <x>320</x>
-       <y>270</y>
+       <y>320</y>
        <width>141</width>
        <height>31</height>
       </rect>
@@ -1321,13 +1336,13 @@
      <property name="geometry">
       <rect>
        <x>170</x>
-       <y>310</y>
+       <y>360</y>
        <width>131</width>
        <height>31</height>
       </rect>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Maximum wavelength depends on the grating.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="channel" stdset="0">
       <string>LS336:XEOL:D</string>
@@ -1362,7 +1377,7 @@
      <property name="geometry">
       <rect>
        <x>320</x>
-       <y>310</y>
+       <y>360</y>
        <width>141</width>
        <height>31</height>
       </rect>
@@ -1409,7 +1424,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>310</y>
+       <y>360</y>
        <width>151</width>
        <height>31</height>
       </rect>
@@ -1426,14 +1441,126 @@
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
+    <widget class="QLabel" name="label_15">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>80</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Manual Out (%)</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="caLineEdit" name="calineedit_12">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>80</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Lucida Sans Typewriter</family>
+       <pointsize>20</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string>29.5</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string>LS336:XEOL:MANUAL_LOAD_RBV</string>
+     </property>
+     <property name="foreground">
+      <color>
+       <red>10</red>
+       <green>42</green>
+       <blue>186</blue>
+      </color>
+     </property>
+     <property name="background">
+      <color>
+       <red>187</red>
+       <green>187</green>
+       <blue>187</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="framePresent" stdset="0">
+      <bool>false</bool>
+     </property>
+     <property name="precision">
+      <number>3</number>
+     </property>
+    </widget>
+    <widget class="caTextEntry" name="catextentry_7">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>80</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string>LS336:XEOL:MANUAL_LOAD</string>
+     </property>
+     <property name="background">
+      <color>
+       <red>115</red>
+       <green>223</green>
+       <blue>255</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="precision">
+      <number>1</number>
+     </property>
+     <property name="precisionMode">
+      <enum>caLineEdit::User</enum>
+     </property>
+     <property name="limitsMode">
+      <enum>caLineEdit::Channel</enum>
+     </property>
+     <property name="maxValue">
+      <double>1000.000000000000000</double>
+     </property>
+     <property name="minValue">
+      <double>0.000000000000000</double>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>110</y>
+      <y>170</y>
       <width>471</width>
-      <height>51</height>
+      <height>61</height>
      </rect>
     </property>
     <property name="title">
@@ -1443,7 +1570,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
+       <y>20</y>
        <width>141</width>
        <height>31</height>
       </rect>
@@ -1464,7 +1591,7 @@
      <property name="geometry">
       <rect>
        <x>170</x>
-       <y>10</y>
+       <y>20</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -1511,7 +1638,7 @@
      <property name="geometry">
       <rect>
        <x>380</x>
-       <y>10</y>
+       <y>20</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -1558,7 +1685,7 @@
      <property name="geometry">
       <rect>
        <x>260</x>
-       <y>10</y>
+       <y>20</y>
        <width>101</width>
        <height>31</height>
       </rect>
@@ -1575,6 +1702,74 @@
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
+   </widget>
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>120</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Heater Load (%)</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="caLineEdit" name="calineedit_11">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>120</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Lucida Sans Typewriter</family>
+      <pointsize>20</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>29.5</string>
+    </property>
+    <property name="channel" stdset="0">
+     <string>LS336:XEOL:LOAD_RBV</string>
+    </property>
+    <property name="foreground">
+     <color>
+      <red>10</red>
+      <green>42</green>
+      <blue>186</blue>
+     </color>
+    </property>
+    <property name="background">
+     <color>
+      <red>187</red>
+      <green>187</green>
+      <blue>187</blue>
+     </color>
+    </property>
+    <property name="colorMode">
+     <enum>caLineEdit::Static</enum>
+    </property>
+    <property name="framePresent" stdset="0">
+     <bool>false</bool>
+    </property>
    </widget>
   </widget>
  </widget>

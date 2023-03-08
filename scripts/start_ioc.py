@@ -14,6 +14,25 @@ ip = socket.gethostbyname('2idlakeshore336.xray.aps.anl.gov')
 # Connect to LakeShore
 ls336 = ls.Model336(ip_address=ip)
 
+# Let's stick to output 3
+output = 3
+
+
+def get_ramp():
+    if ls336.get_setpoint_ramp_status(output):
+        return 'Setpoint ramping!'
+    else:
+        return 'Setpoint reached!'
+
+
+def get_heater():
+    status = ls336.get_heater_range(output).value
+    if status:
+        return 'Heater On'
+    else:
+        return 'Heater Off'
+
+
 # Some useful constants
 heater_off = ls.model_336.Model336HeaterVoltageRange(0)
 heater_on = ls.model_336.Model336HeaterVoltageRange(1)
@@ -25,8 +44,10 @@ input_b = ls.model_336.Model336InputChannel.CHANNEL_B
 input_c = ls.model_336.Model336InputChannel.CHANNEL_C
 input_d = ls.model_336.Model336InputChannel.CHANNEL_D
 
-# Let's stick to output 3
-output = 3
+# Fetch an alarm status
+alarm = alarm.STATE_ALARM
+alarm_green = 0
+alarm_red = 2
 
 # Create an asyncio dispatcher, the event loop is now running
 dispatcher = asyncio_dispatcher.AsyncioDispatcher()
@@ -41,24 +62,35 @@ builder.SetBlocking(True)
 # Sample temperature
 rbv_sampleT = builder.aIn(
                           'TSAMPLE_RBV',
-                          initial_value=ls336.get_celsius_reading('A')
+                          initial_value=ls336.get_celsius_reading('A'),
+                          PREC=3,
+                          DESC='Sample surface temperature',
+                          EGU='degC'
                           )
 
 # Cell temperature
 rbv_cellT = builder.aIn(
                         'TCELL_RBV',
-                        initial_value=ls336.get_celsius_reading('B')
+                        initial_value=ls336.get_celsius_reading('B'),
+                        PREC=3,
+                        DESC='Sample surface temperature',
+                        EGU='degC'
                         )
 
 # Set point temperature
 rbv_setT = builder.aIn(
                        'TSET_RBV',
-                       initial_value=ls336.get_control_setpoint(output)
+                       initial_value=ls336.get_control_setpoint(output),
+                       PREC=3,
+                       EGU='degC',
+                       DESC='Actual setpoint temperature'
                        )
 rec_setT = builder.aOut(
                         'TSET',
                         initial_value=ls336.get_control_setpoint(output),
                         on_update=lambda v: ls336.set_control_setpoint(output, v),
+                        EGU='degC',
+                        DESC='Sample target temperature',
                         DRVL=15,
                         DRVH=110,
                         )
@@ -82,43 +114,61 @@ rbv_statuslbl = builder.stringIn(
 rbv_mode = builder.stringIn(
                             'MODE_RBV',
                             initial_value=ls336.get_heater_output_mode(output) \
-                                          .name.replace('_', ' '),
+                                          ['mode'].name.replace('_', ' '),
                             )
 rec_mode = builder.stringOut(
                              'MODE',
                              initial_value=ls336.get_heater_output_mode(output) \
-                                           .name.replace('_', ' '),
+                                           ['mode'].name.replace('_', ' '),
                              on_update=lambda v: set_mode(v)
                              )
 
-# Heater load
+# Heater load (closed loop)
 rbv_load = builder.aIn(
                        'LOAD_RBV',
                        initial_value=ls336.get_analog_output_percentage(output),
+                       PREC=3,
+                       EGU='%'
                        )
-rec_load = builder.aOut(
-                        'LOAD',
-                        initial_value=ls336.get_analog_output_percentage(output),
-                        on_update=lambda v:
-                                  ls336.set_analog_output_percentage(output, v)
-                        )
+
+# Heater load (open loop)
+rbv_manload = builder.aIn(
+                          'MANUAL_LOAD_RBV',
+                          initial_value=ls336.get_manual_output(output),
+                          PREC=3,
+                          EGU='%',
+                          DESC='Open loop mode only'
+                          )
+rec_manload = builder.aOut(
+                           'MANUAL_LOAD',
+                           initial_value=ls336.get_manual_output(output),
+                           on_update=lambda v:
+                                     ls336.set_manual_output(output, v),
+                           PREC=3,
+                           EGU='%',
+                           DESC='Open loop mode only'
+                           )
 
 # Setpoint ramp rate
 rbv_ramp = builder.aIn(
                        'RAMP_RBV',
                        initial_value=ls336.get_setpoint_ramp_parameter(output)[
                                      'rate_value'
-                                     ]
+                                     ],
+                       EGU='degC',
+                       PREC=3,
+                       DESC='Actual setpoint ramp rate'
                        )
 rec_ramp = builder.aOut(
                         'RAMP',
                         initial_value=ls336.get_setpoint_ramp_parameter(output)[
                                       'rate_value'
-                                      ]
-                        initial_value=ls336.get_setpoint_ramp_parameter(output),
+                                      ],
                         on_update=lambda v: ls336.set_setpoint_ramp_parameter(
                                             output, True, v
-                                            )
+                                            ),
+                        EGU='degC',
+                        DESC='Setpoint ramp rate'
                         )
 
 # Setpoint ramp status
@@ -179,11 +229,24 @@ async def update_status():
         rbv_p.set(ls336.get_heater_pid(output)['gain'])
         rbv_i.set(ls336.get_heater_pid(output)['integral'])
         rbv_d.set(ls336.get_heater_pid(output)['ramp_rate'])
-        rbv_statuslbl.set(get_heater())
+        rbv_status.set(ls336.get_heater_range(output).value)
+  
+        if ls336.get_heater_range(output).value:
+            rbv_statuslbl.set('Heater on', severity=alarm_green)
+        else:
+            rbv_statuslbl.set('Heater off', severity=alarm_red)
+
         rbv_ramp_status.set(ls336.get_setpoint_ramp_status(output))
-        rbv_ramp_statuslblset(get_ramp())
+
+        if ls336.get_setpoint_ramp_status(output):
+            rbv_ramp_statuslbl.set('Setpoint ramping!', severity=alarm_red)
+        else:
+            rbv_ramp_statuslbl.set('Setpoint reached!', severity=alarm_green)
+
         rbv_mode.set(ls336.get_heater_output_mode(output) \
-                     .name.replace('_', ' '))
+                     ['mode'].name.replace('_', ' '))
+
+        rbv_manload.set(ls336.get_manual_output(output))
 
         await asyncio.sleep(0.5)
 
@@ -195,28 +258,13 @@ def set_heater(v):
         ls336.set_heater_range(output, heater_on)
 
 
-def get_heater():
-    status = ls336.get_heater_range(output).value
-    if status:
-        return 'Heater On'
-    else:
-        return 'Heater Off'
-
-
 def set_mode(v):
     if v == 'OFF':
-        ls336.set_heater_output_mode(output, mode_off)
+        ls336.set_heater_output_mode(output, mode_off, input_a)
     elif v == 'OPEN LOOP':
-        ls336.set_heater_output_mode(output, mode_on)
+        ls336.set_heater_output_mode(output, mode_open, input_a)
     elif v == 'CLOSED LOOP':
         ls336.set_heater_output_mode(output, mode_closed, input_a)
-
-
-def get_ramp():
-    if ls336.get_setpoint_ramp_status:
-        return 'Setpoint ramping!'
-    else:
-        return 'Setpoint reached!'
 
 
 def set_pid(v, mode):
