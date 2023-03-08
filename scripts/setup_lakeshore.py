@@ -17,6 +17,7 @@ coeffs = ls.model_336.Model336CurveTemperatureCoefficients
 # Rename inputs
 ls336.set_sensor_name('A', 'Sample Temp')
 ls336.set_sensor_name('B', 'Cell Temp')
+ls336.set_sensor_name('C', 'Mount Temp')
 
 # Set RTD header into curve 21 (first one that can be customized)
 rtd_header = header(

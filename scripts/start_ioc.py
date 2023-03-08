@@ -77,6 +77,15 @@ rbv_cellT = builder.aIn(
                         EGU='degC'
                         )
 
+# Mount temperature
+rbv_mountT = builder.aIn(
+                         'TMOUNT_RBV',
+                         initial_value=ls336.get_celsius_reading('C'),
+                         PREC=3,
+                         DESC='Cell mount temperature',
+                         EGU='degC'
+                         )
+
 # Set point temperature
 rbv_setT = builder.aIn(
                        'TSET_RBV',
@@ -223,6 +232,7 @@ async def update_status():
     while True:
         rbv_sampleT.set(ls336.get_celsius_reading('A'))
         rbv_cellT.set(ls336.get_celsius_reading('B'))
+        rbv_mountT.set(ls336.get_celsius_reading('C'))
         rbv_setT.set(ls336.get_control_setpoint(output))
         rbv_load.set(ls336.get_analog_output_percentage(output))
         rbv_ramp.set(ls336.get_setpoint_ramp_parameter(output)['rate_value'])
@@ -230,7 +240,7 @@ async def update_status():
         rbv_i.set(ls336.get_heater_pid(output)['integral'])
         rbv_d.set(ls336.get_heater_pid(output)['ramp_rate'])
         rbv_status.set(ls336.get_heater_range(output).value)
-  
+
         if ls336.get_heater_range(output).value:
             rbv_statuslbl.set('Heater on', severity=alarm_green)
         else:

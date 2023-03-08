@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>490</width>
-    <height>662</height>
+    <height>718</height>
    </rect>
   </property>
   <property name="palette">
@@ -678,7 +678,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>240</y>
+      <y>290</y>
       <width>471</width>
       <height>411</height>
      </rect>
@@ -1560,7 +1560,7 @@
       <x>10</x>
       <y>170</y>
       <width>471</width>
-      <height>61</height>
+      <height>111</height>
      </rect>
     </property>
     <property name="title">
@@ -1697,6 +1697,74 @@
      </property>
      <property name="text">
       <string>Cell (deg C)</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="caLineEdit" name="calineedit_13">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>60</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Lucida Sans Typewriter</family>
+       <pointsize>20</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+     <property name="placeholderText">
+      <string>29.5</string>
+     </property>
+     <property name="channel" stdset="0">
+      <string>LS336:XEOL:TMOUNT_RBV</string>
+     </property>
+     <property name="foreground">
+      <color>
+       <red>10</red>
+       <green>42</green>
+       <blue>186</blue>
+      </color>
+     </property>
+     <property name="background">
+      <color>
+       <red>187</red>
+       <green>187</green>
+       <blue>187</blue>
+      </color>
+     </property>
+     <property name="colorMode">
+      <enum>caLineEdit::Static</enum>
+     </property>
+     <property name="framePresent" stdset="0">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_16">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>60</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Mount (deg C)</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
