@@ -1,6 +1,8 @@
 # lakeshore-IOC
 EPICS soft IOC implementation for the LakeShore 336 temperature controller, tailored towards the in situ solar cell chamber created for the In Situ Nanoprobe (ISN) 19-ID beamline in the Advanced Photon Source (APS).
 
+![UI example](ui/qt_ui.jpg)
+
 # Quick-Start
 This installation requires a python environment, with setup done below using conda.
 
@@ -77,3 +79,6 @@ ls336.set_sensor_name('C', 'Mount Temp')
 ```
 
 The calibration data is taken from the `data/TH100PT_curve.txt` file, change that as needed for your particular sensor.
+
+# Credits
+- softioc: https://github.com/DiamondLightSource/pythonSoftIOC
