@@ -1,0 +1,10 @@
+name: lakeshore
+channels:
+  - defaults
+dependencies:
+  - pip=24.2
+  - python=3.8
+  - pip:
+    - lakeshore==1.8.1
+    - numpy==1.24.4
+    - softioc==4.6.1
